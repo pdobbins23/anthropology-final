@@ -4,7 +4,7 @@ class Game extends Phaser.Scene {
 	}
 
 	preload() {
-		// sprites
+		// player sprites
 		this.load.spritesheet("fish", "assets/sprites/fish.png", {
 			frameWidth: 64,
 		});
@@ -20,6 +20,10 @@ class Game extends Phaser.Scene {
 		this.load.spritesheet("human", "assets/sprites/human.png", {
 			frameWidth: 64,
 		});
+
+		// obstacle sprites
+
+		// pickup sprites
 
 		// backgrounds
 		this.load.image("ocean", "assets/backgrounds/ocean.png");
@@ -60,6 +64,8 @@ class Game extends Phaser.Scene {
 		this.playerSpeed = 200;
 
 		// level
+		this.timeUntilNextSpawn = 1000;
+		
 		this.physics.world.setBounds(0, this.cameras.main.height / 2, 640, 240);
 
 		// input
@@ -67,8 +73,10 @@ class Game extends Phaser.Scene {
 	}
 
 	update(time, deltaTime) {
+		// update background
 		this.background.tilePositionX += (this.playerSpeed * deltaTime) / 1000;
 
+		// update player
 		let velocity = new Phaser.Math.Vector2(0, 0);
 
 		if (this.cursors.up.isDown) velocity.y -= 1;
@@ -79,5 +87,22 @@ class Game extends Phaser.Scene {
 		this.player
 			.setVelocity(velocity.x * this.playerSpeed, velocity.y * this.playerSpeed)
 			.setDepth(10 + this.player.y);
+
+		// spawn objects
+		this.timeUntilNextSpawn -= deltaTime;
+
+		if (this.timeUntilNextSpawn <= 0) {
+			this.spawnObject();
+
+			this.timeUntilNextSpawn = this.rand(500, 2000);
+		}
+	}
+
+	rand(min, max) {
+		return (Math.random() * (max - min + 1)) + min;
+	}
+
+	spawnObject() {
+		console.log("spawn");
 	}
 }
