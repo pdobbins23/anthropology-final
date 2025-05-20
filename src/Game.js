@@ -42,7 +42,7 @@ class Game extends Phaser.Scene {
 			"forest_canopy",
 			"grassland",
 		];
-		this.stage = this.stages[0];
+		this.stage = 0;
 
 		// background
 		this.background = this.add
