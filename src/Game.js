@@ -29,6 +29,14 @@ class Game extends Phaser.Scene {
 		this.load.image("forest_ground", "assets/backgrounds/forest_ground.png");
 		this.load.image("forest_canopy", "assets/backgrounds/forest_canopy.png");
 		this.load.image("grassland", "assets/backgrounds/grassland.png");
+
+		// popups
+		this.load.image("intro", "assets/popups/intro.png");
+		this.load.image("level1", "assets/popups/level1.png");
+		this.load.image("level2", "assets/popups/level2.png");
+		this.load.image("level3", "assets/popups/level3.png");
+		this.load.image("level4", "assets/popups/level4.png");
+		this.load.image("level5", "assets/popups/level5.png");
 	}
 
 	create() {
@@ -76,6 +84,8 @@ class Game extends Phaser.Scene {
 			.setOrigin(0)
 			.setDepth(0);
 
+		this.menuScrollSpeed = 50;
+
 		// player
 		this.player = this.physics.add.sprite(100, 500, "fish");
 		this.player.setCollideWorldBounds(true);
@@ -91,6 +101,11 @@ class Game extends Phaser.Scene {
 		this.timeUntilNextSpawn = 1000;
 		
 		this.physics.world.setBounds(0, this.cameras.main.height / 2, 640, 240);
+
+		// pop up
+		this.popUp = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "intro");
+
+		this.popUp.setVisible(true);
 
 		// input
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -117,10 +132,10 @@ class Game extends Phaser.Scene {
 	}
 
 	updateInstructions(time, deltaTime) {
-		
+		this.background.tilePositionX += (this.menuScrollSpeed * deltaTime) / 1000;
 	}
 
-	updateInstructions(time, deltaTime) {
+	updateObjective(time, deltaTime) {
 		
 	}
 
