@@ -21,9 +21,7 @@ class Game extends Phaser.Scene {
 			frameWidth: 64,
 		});
 
-		// obstacle sprites
-
-		// pickup sprites
+		// trait sprites
 
 		// backgrounds
 		this.load.image("ocean", "assets/backgrounds/ocean.png");
@@ -34,6 +32,28 @@ class Game extends Phaser.Scene {
 	}
 
 	create() {
+		// animations
+		this.anims.create({
+			key: "fish",
+			frameRate: 5,
+			repeat: -1,
+			frames: this.anims.generateFrameNumbers("fish", {
+				start: 0,
+				end: 5,
+			})
+		});
+
+		// game state
+		// 
+		// 0 = showing instructions
+		// 1 = showing objective
+		// 2 = playing
+		// 3 = transition level
+		// 4 = end screen
+		//
+		// 0 -> 1 -> 2 -> 3 -> 1 -> 2 -> 3 -> 1 -> ... -> 3 -> 4
+		this.gameState = 0;
+		
 		// stage
 		this.stages = [
 			"ocean",
@@ -61,7 +81,11 @@ class Game extends Phaser.Scene {
 		this.player.setCollideWorldBounds(true);
 		this.player.body.setSize(this.player.width, this.player.height);
 
-		this.playerSpeed = 200;
+		this.playerSpeed = 100;
+
+		this.player.play("fish");
+
+		this.player.setVisible(false);
 
 		// level
 		this.timeUntilNextSpawn = 1000;
@@ -73,6 +97,34 @@ class Game extends Phaser.Scene {
 	}
 
 	update(time, deltaTime) {
+		switch (this.gameState) {
+			case 0:
+				this.updateInstructions(time, deltaTime);
+				break;
+			case 1:
+				this.updateObjective(time, deltaTime);
+				break;
+			case 2:
+				this.updatePlaying(time, deltaTime);
+				break;
+			case 3:
+				this.updateTransition(time, deltaTime);
+				break;
+			case 4:
+				this.updateEndScreen(time, deltaTime);
+				break;
+		}
+	}
+
+	updateInstructions(time, deltaTime) {
+		
+	}
+
+	updateInstructions(time, deltaTime) {
+		
+	}
+
+	updatePlaying(time, deltaTime) {
 		// update background
 		this.background.tilePositionX += (this.playerSpeed * deltaTime) / 1000;
 
@@ -96,6 +148,14 @@ class Game extends Phaser.Scene {
 
 			this.timeUntilNextSpawn = this.rand(500, 2000);
 		}
+	}
+
+	updateTransition(time, deltaTime) {
+		
+	}
+
+	updateEndScreen(time, deltaTime) {
+		
 	}
 
 	rand(min, max) {
