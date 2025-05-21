@@ -29,6 +29,7 @@ class Game extends Phaser.Scene {
 		this.load.image("forest_ground", "assets/backgrounds/forest_ground.png");
 		this.load.image("forest_canopy", "assets/backgrounds/forest_canopy.png");
 		this.load.image("grassland", "assets/backgrounds/grassland.png");
+		this.load.image("city", "assets/backgrounds/city.png");
 
 		// popups
 		this.load.image("intro", "assets/popups/intro.png");
@@ -69,6 +70,7 @@ class Game extends Phaser.Scene {
 			"forest_ground",
 			"forest_canopy",
 			"grassland",
+			"city",
 		];
 		this.stage = 0;
 
@@ -104,6 +106,7 @@ class Game extends Phaser.Scene {
 
 		// pop up
 		this.popUp = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "intro");
+		this.popUp.setDepth(100);
 
 		this.popUp.setVisible(true);
 
@@ -131,12 +134,31 @@ class Game extends Phaser.Scene {
 		}
 	}
 
+	nextState() {
+		this.gameState += 1;
+
+		if (this.gameState == 4 && this.stage != 6)
+			this.gameState = 1;
+
+		switch (this.gameState) {
+			case 1:
+				this.popUp.setTexture(`level${this.stage + 1}`).setVisible(true);
+				break;
+			case 2:
+				this.popUp.setVisible(false);
+				break;
+			case 4:
+				this.popUp.setTexture(`end_screen`).setVisible(true);
+				break;
+		}
+	}
+
 	updateInstructions(time, deltaTime) {
 		this.background.tilePositionX += (this.menuScrollSpeed * deltaTime) / 1000;
 	}
 
 	updateObjective(time, deltaTime) {
-		
+		this.background.tilePositionX += (this.menuScrollSpeed * deltaTime) / 1000;
 	}
 
 	updatePlaying(time, deltaTime) {
