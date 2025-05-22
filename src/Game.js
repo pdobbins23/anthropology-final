@@ -1,7 +1,7 @@
 const STAGE_TRAITS = [
 	{"tetrapod_diet": 0, "tetrapod_lungs": 0, "tetrapod_skin": 0, "tetrapod_skull": 0},
 	{"small_mammal_claws": 0, "small_mammal_diet": 0, "small_mammal_hair": 0, "small_mammal_jaw_bone": 0},
-	{"primate_diet2": 0, "primate_fingernails": 0, "primate_grasping_hand": 0, "primate_opposable_toe": 0, "primate_skull": 0},
+	{"primate_diet2": 0, "primate_grasping_hand": 0, "brain_pink": 0, "primate_binocular_eyes": 0},
 	{"early_human_art": 0, "early_human_diet_meat": 0, "early_human_diet_nuts": 0, "early_human_teeth_incisors": 0, "early_human_tool": 0, "early_human_upright": 0},
 	{"modern_human_art": 0, "modern_human_diet": 0, "modern_human_hammer": 0, "modern_human_language": 0, "modern_human_weapon": 0},
 ];
@@ -104,7 +104,7 @@ class Game extends Phaser.Scene {
 		});
 		this.anims.create({
 			key: "small_mammal",
-			frameRate: 5,
+			frameRate: 15,
 			repeat: -1,
 			frames: this.anims.generateFrameNumbers("small_mammal", {
 				start: 0,
