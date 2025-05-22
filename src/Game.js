@@ -237,9 +237,13 @@ class Game extends Phaser.Scene {
 	nextState() {
 		this.gameState += 1;
 
-		if (this.gameState == 4 && this.stage != 5) {
+		if (this.gameState == 4) {
 			this.gameState = 1;
 			this.stage += 1;
+		}
+
+		if (this.stage == 5) {
+			this.gameState = 4;
 		}
 
 		switch (this.gameState) {
@@ -269,7 +273,7 @@ class Game extends Phaser.Scene {
 				this.player.setCollideWorldBounds(false);
 
 				this.traitsGroup.clear(true, true);
-								
+
 				break;
 			case 4:
 				this.popUp.setTexture("end_screen").setVisible(true);
@@ -369,8 +373,6 @@ class Game extends Phaser.Scene {
 
 		let idx = Math.floor(this.rand(0, traits.length - 1));
 		let randomTrait = traits[idx];
-
-		console.log(`spawn: ${randomTrait} (${idx})`);
 
 		let obj = this.traitsGroup.create(this.cameras.main.width + 100, y, randomTrait)
 			.setVelocity(-speed, 0)
