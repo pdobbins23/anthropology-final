@@ -246,7 +246,6 @@ class Game extends Phaser.Scene {
 			case 1:
 				this.player.setVisible(false);
 				this.player.setCollideWorldBounds(true);
-				this.player.x = 100;
 
 				this.player.anims.stop();
 				this.player.setTexture(this.playerSprites[this.stage])
@@ -262,6 +261,8 @@ class Game extends Phaser.Scene {
 				this.popUp.setVisible(false);
 
 				this.player.play(this.playerSprites[this.stage]);
+
+				this.player.setX(100);
 
 				break;
 			case 3:
