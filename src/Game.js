@@ -371,8 +371,11 @@ class Game extends Phaser.Scene {
 
 			this.player.setX(100);
 			this.player.setY(this.cameras.main.height - 200);
+			this.player.setVisible(false);
 
 			this.background.setTexture(this.stages[this.stage]);
+
+			this.popUp.setTexture("intro");
 		}
 	}
 
