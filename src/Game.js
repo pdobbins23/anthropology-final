@@ -276,12 +276,15 @@ class Game extends Phaser.Scene {
 
 				break;
 			case 4:
+				this.background.setTexture("city");
+
 				this.popUp.setTexture("end_screen").setVisible(true);
 
 				this.player.setX(100).setY(this.cameras.main.height - 200);
 
 				this.player.setTexture("modern_human");
 				this.player.play("modern_human");
+				this.player.setVelocity(0, 0);
 				
 				break;
 		}
@@ -358,7 +361,19 @@ class Game extends Phaser.Scene {
 	}
 
 	updateEndScreen(time, deltaTime) {
-		
+		this.background.tilePositionX += (this.menuScrollSpeed * deltaTime) / 1000;
+
+		if (Phaser.Input.Keyboard.JustDown(this.enterKey)) {
+			this.stage = 0;
+			this.gameState = 0;
+
+			this.stageTraits = JSON.parse(JSON.stringify(STAGE_TRAITS));
+
+			this.player.setX(100);
+			this.player.setY(this.cameras.main.height - 200);
+
+			this.background.setTexture(this.stages[this.stage]);
+		}
 	}
 
 	rand(min, max) {
