@@ -184,19 +184,17 @@ class Game extends Phaser.Scene {
 		this.playerSprites = [
 			"fish",
 			"tetrapod",
-			"mammal",
+			"small_mammal",
 			"primate",
 			"early_human",
 			"modern_human",
 		];
 		
-		this.player = this.physics.add.sprite(100, 500, "fish");
+		this.player = this.physics.add.sprite(100, 500, null);
 		this.player.setCollideWorldBounds(true);
 		this.player.body.setSize(this.player.width, this.player.height);
 
 		this.playerSpeed = 100;
-
-		this.player.play("fish");
 
 		this.player.setVisible(false);
 
@@ -249,9 +247,10 @@ class Game extends Phaser.Scene {
 				this.player.setVisible(false);
 				this.player.setCollideWorldBounds(true);
 				this.player.x = 100;
-				this.player.setTexture(this.playerSprites[this.stage]);
-				
-				this.player.play(this.playerSprites[this.stage]);
+
+				this.player.anims.stop();
+				this.player.setTexture(this.playerSprites[this.stage])
+				this.player.body.setSize(this.player.width, this.player.height);
 
 				this.background.setTexture(this.stages[this.stage]);
 
@@ -261,6 +260,9 @@ class Game extends Phaser.Scene {
 			case 2:
 				this.player.setVisible(true);
 				this.popUp.setVisible(false);
+
+				this.player.play(this.playerSprites[this.stage]);
+
 				break;
 			case 3:
 				this.player.setCollideWorldBounds(false);
