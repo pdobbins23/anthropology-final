@@ -268,11 +268,8 @@ class Game extends Phaser.Scene {
 			case 3:
 				this.player.setCollideWorldBounds(false);
 
-				this.traitsGroup.children.iterate((child) => {
-					if (child != undefined)
-						child.destroy()
-				});
-				
+				this.traitsGroup.clear(true, true);
+								
 				break;
 			case 4:
 				this.popUp.setTexture("end_screen").setVisible(true);
