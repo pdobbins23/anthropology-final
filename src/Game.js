@@ -148,7 +148,7 @@ class Game extends Phaser.Scene {
 				this.popUp.setVisible(false);
 				break;
 			case 4:
-				this.popUp.setTexture(`end_screen`).setVisible(true);
+				this.popUp.setTexture("end_screen").setVisible(true);
 				break;
 		}
 	}
