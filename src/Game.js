@@ -237,7 +237,7 @@ class Game extends Phaser.Scene {
 	nextState() {
 		this.gameState += 1;
 
-		if (this.gameState == 4 && this.stage != 6) {
+		if (this.gameState == 4 && this.stage != 5) {
 			this.gameState = 1;
 			this.stage += 1;
 		}
