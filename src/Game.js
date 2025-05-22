@@ -21,6 +21,7 @@ class Game extends Phaser.Scene {
 		});
 		this.load.spritesheet("small_mammal", "assets/sprites/small_mammal.png", {
 			frameWidth: 128,
+			frameHeight: 61,
 		});
 		this.load.spritesheet("primate", "assets/sprites/primate.png", {
 			frameWidth: 128,
@@ -275,6 +276,12 @@ class Game extends Phaser.Scene {
 				break;
 			case 4:
 				this.popUp.setTexture("end_screen").setVisible(true);
+
+				this.player.setX(100).setY(this.cameras.main.height - 200);
+
+				this.player.setTexture("modern_human");
+				this.player.play("modern_human");
+				
 				break;
 		}
 	}
